@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_plugin_record_plus/flutter_plugin_record_plus.dart';
-import 'package:flutter_plugin_record_plus/index.dart';
+import 'package:flutter_plugin_record_plus/flutter_plugin_record.dart';
+import 'package:flutter_plugin_record_plus/utils/common_toast.dart';
 
 import 'custom_overlay.dart';
 
@@ -15,6 +15,7 @@ class VoiceWidget extends StatefulWidget {
   final double? height;
   final EdgeInsets? margin;
   final Decoration? decoration;
+  final Widget? child;
 
   /// startRecord 开始录制回调  stopRecord回调
   const VoiceWidget(
@@ -23,7 +24,8 @@ class VoiceWidget extends StatefulWidget {
       this.stopRecord,
       this.height,
       this.decoration,
-      this.margin})
+      this.margin,
+      this.child})
       : super(key: key);
 
   @override
@@ -42,7 +44,7 @@ class _VoiceWidgetState extends State<VoiceWidget> {
 
   ///默认隐藏状态
   bool voiceState = true;
-  FlutterPluginRecordPlus? recordPlugin;
+  FlutterPluginRecord? recordPlugin;
   Timer? _timer;
   int _count = 0;
   OverlayEntry? overlayEntry;
@@ -50,7 +52,7 @@ class _VoiceWidgetState extends State<VoiceWidget> {
   @override
   void initState() {
     super.initState();
-    recordPlugin = new FlutterPluginRecordPlus();
+    recordPlugin = new FlutterPluginRecord();
 
     _init();
 
@@ -132,7 +134,7 @@ class _VoiceWidgetState extends State<VoiceWidget> {
                         voiceIco,
                         width: 100,
                         height: 100,
-                        package: 'flutter_plugin_record',
+                        package: 'flutter_plugin_record_plus',
                       ),
               ),
               Container(
@@ -251,21 +253,22 @@ class _VoiceWidgetState extends State<VoiceWidget> {
           offset = details.globalPosition.dy;
           moveVoiceView();
         },
-        child: Container(
-          height: widget.height ?? 60,
-          // color: Colors.blue,
-          decoration: widget.decoration ??
-              BoxDecoration(
-                borderRadius: new BorderRadius.circular(6.0),
-                border: Border.all(width: 1.0, color: Colors.grey.shade200),
+        child: widget.child ??
+            Container(
+              height: widget.height ?? 60,
+              // color: Colors.blue,
+              decoration: widget.decoration ??
+                  BoxDecoration(
+                    borderRadius: new BorderRadius.circular(6.0),
+                    border: Border.all(width: 1.0, color: Colors.grey.shade200),
+                  ),
+              margin: widget.margin ?? EdgeInsets.fromLTRB(50, 0, 50, 20),
+              child: Center(
+                child: Text(
+                  textShow,
+                ),
               ),
-          margin: widget.margin ?? EdgeInsets.fromLTRB(50, 0, 50, 20),
-          child: Center(
-            child: Text(
-              textShow,
             ),
-          ),
-        ),
       ),
     );
   }

@@ -1,61 +1,77 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:flutter_plugin_record_example/path_provider_screen.dart';
+import 'package:flutter_plugin_record_example/record_mp3_screen.dart';
+import 'package:flutter_plugin_record_example/record_screen.dart';
+import 'package:flutter_plugin_record_example/wechat_record_screen.dart';
 
-import 'package:flutter/services.dart';
-import 'package:flutter_plugin_record_plus/flutter_plugin_record_plus.dart';
+void main() => runApp(MyApp());
 
-void main() {
-  runApp(const MyApp());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo',
+      theme: new ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {
+        "RecordScreen": (BuildContext context) => new RecordScreen(),
+        "RecordMp3Screen": (BuildContext context) => new RecordMp3Screen(),
+        "WeChatRecordScreen": (BuildContext context) =>
+            new WeChatRecordScreen(),
+        "PathProviderScreen": (BuildContext context) =>
+            new PathProviderScreen(),
+      },
+    );
+  }
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _flutterPluginRecordPlusPlugin = FlutterPluginRecordPlus();
-
+class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion="";
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    // try {
-    //   platformVersion =
-    //       await _flutterPluginRecordPlusPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    // } on PlatformException {
-    //   platformVersion = 'Failed to get platform version.';
-    // }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("flutter版微信语音录制实现"),
+      ),
+      body: new Center(
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed<dynamic>(context, "RecordScreen");
+                },
+                child: new Text("进入语音录制界面")),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed<dynamic>(context, "RecordMp3Screen");
+                },
+                child: new Text("进入录制mp3模式")),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed<dynamic>(context, "WeChatRecordScreen");
+                },
+                child: new Text("进入仿微信录制界面")),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed<dynamic>(context, "PathProviderScreen");
+                },
+                child: new Text("进入文件路径获取界面")),
+          ],
         ),
       ),
     );

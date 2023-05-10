@@ -1,42 +1,50 @@
-group 'com.record.flutter_plugin_record_plus'
-version '1.0'
+group 'record.wilson.flutter.com.flutter_plugin_record'
+version '1.0-SNAPSHOT'
 
 buildscript {
+//    ext.kotlin_version = '1.2.71'
+    ext.kotlin_version = '1.3.50'
+
     repositories {
         google()
-        mavenCentral()
+        jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.2'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        mavenCentral()
+        jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 29
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
-
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
     }
 }
+
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    implementation 'com.github.shaoshuai904:RecordWav:1.0.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.RoleWong:RecordWav:v1.0'
     implementation "androidx.appcompat:appcompat:1.0.0"
-//    implementation 'com.github.adrielcafe:AndroidAudioConverter:0.0.8'
-    implementation 'com.arthenica:mobile-ffmpeg-full:4.4'
+    implementation 'com.github.RoleWong:AndroidAudioConverter:0.6'
 }

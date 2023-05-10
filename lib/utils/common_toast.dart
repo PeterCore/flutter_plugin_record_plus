@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_plugin_record_plus/index.dart';
+import 'package:flutter_plugin_record_plus/widgets/custom_overlay.dart';
 
 class CommonToast {
   static showView({

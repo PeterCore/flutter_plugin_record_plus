@@ -1,15 +1,13 @@
-# flutter_plugin_record_plus
+## 使用Flutter实现 仿微信录音的插件 
+该插件原插件地址为[flutter_plugin_record](https://pub.dev/packages/flutter_plugin_record)
 
-A new Flutter project.
+## 修复与改进
+- 支持flutter 3.0.0
+- 安卓端播放音频不申请麦克风权限。
+- 修复安卓Native AndroidAudioConverter 无法引入问题。
 
-## Getting Started
+## 目前维护方
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+本插件目前由 [腾讯云IM Flutter团队](https://cloud.tencent.com/document/product/269/68823) 维护。
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+如果您有使用Flutter开发IM即时通讯及音视频通话需求，欢迎使用我们的产品。
