@@ -10,7 +10,7 @@ class CommonToast {
     TextStyle? style,
     Widget? icon,
     Duration duration = const Duration(seconds: 1),
-    int count = 3,
+    int count = 2,
     Function? onTap,
   }) {
     OverlayEntry? overlayEntry;
@@ -24,36 +24,28 @@ class CommonToast {
     if (overlayEntry == null) {
       overlayEntry = new OverlayEntry(builder: (content) {
         return Container(
-          child: GestureDetector(
-            onTap: () {
-              if (onTap != null) {
-                removeOverlay();
-                onTap();
-              }
-            },
-            child: CustomOverlay(
-              icon: Column(
-                children: [
-                  Padding(
-                    child: icon,
-                    padding: const EdgeInsets.only(
-                      bottom: 10.0,
-                    ),
+          child: CustomOverlay(
+            icon: Column(
+              children: [
+                Padding(
+                  child: icon,
+                  padding: const EdgeInsets.only(
+                    bottom: 10.0,
                   ),
-                  Container(
+                ),
+                Container(
 //                      padding: EdgeInsets.only(right: 20, left: 20, top: 0),
-                    child: Text(
-                      msg ?? '',
-                      style: style ??
-                          TextStyle(
-                            fontStyle: FontStyle.normal,
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                    ),
-                  )
-                ],
-              ),
+                  child: Text(
+                    msg ?? '',
+                    style: style ??
+                        TextStyle(
+                          fontStyle: FontStyle.normal,
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                  ),
+                )
+              ],
             ),
           ),
         );

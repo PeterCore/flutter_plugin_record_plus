@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_plugin_record_plus/flutter_plugin_record.dart';
-import 'package:flutter_plugin_record_plus/utils/common_toast.dart';
 
+import '../utils/common_toast.dart';
 import 'custom_overlay.dart';
 
 typedef startRecord = Future Function();
